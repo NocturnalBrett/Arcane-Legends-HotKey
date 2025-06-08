@@ -2,12 +2,12 @@
 #Include Utils.ahk
 
 
-Class Remppaing {
+Class Remapping {
 
     
-    AshForest(isElite){
+    Static AshForest(isElite){
     ; Remaps to Map
-    GoToMap()
+    this.GoToMap("left")
     Utils.RandomSleep(250, 300)
     if (isElite){
         MouseClick("left", 1768, 982) ; clicks elite
@@ -22,10 +22,8 @@ Class Remppaing {
    
     }
 
-    BlueAbyss(isElite){
-        MouseClick("left", 187, 67)  ; Clicks avatar for main menu
-        Utils.RandomSleep(250, 300)
-        MouseClick("left", 561, 977)  ; opens map 
+    Static BlueAbyss(isElite){
+        this.GoToMap("right")
         Utils.RandomSleep(250, 300)
         if (isElite){
             MouseClick("left", 1768, 982) ; clicks elite
@@ -39,11 +37,8 @@ Class Remppaing {
         MouseClick("left", 1182, 902)
     }
 
-    Hedo(isElite){
-        ; Remaps to Map
-        MouseClick("left", 187, 67)  ; Clicks the avatar
-        Utils.RandomSleep(250, 300)
-        MouseClick("left", 561, 977)  ; Opens the map
+    Static Hedo(isElite){
+        this.GoToMap("right")
         Utils.RandomSleep(250, 300)
         if (isElite){
         MouseClick("left", 1768, 982) ; turns game to elite
@@ -55,11 +50,9 @@ Class Remppaing {
         MouseClick("left", 965, 814)
     }
 
-    Indigo(isElite){
+    Static Indigo(isElite){
         ; Remaps to Map
-        MouseClick("left", 187, 67)  ; Clicks avatar for main menu
-        Utils.RandomSleep(250, 300)
-        MouseClick("left", 561, 977)  ; opens map 
+        this.GoToMap("right")
         Utils.RandomSleep(250, 300)
         if (isElite){
         MouseClick("left", 1768, 982) ; clicks elite
@@ -73,14 +66,14 @@ Class Remppaing {
         MouseClick("left", 1182, 902)
     }
 
-    GoToMap(direction){
+    Static GoToMap(direction){
         left := "left"
         right := "right"
         ToolTip("Use " . left . "or " . right)
         MouseClick("left", 187, 67)  ; Clicks avatar for main menu
-        Utils.RandomSleep(175, 250)
+        Utils.RandomSleep(250, 300)
         MouseClick("left", 561, 977)  ; opens map 
-        Utils.RandomSleep(175, 250)
+        Utils.RandomSleep(250, 300)
         if direction = "left"
         {
             MouseClickDrag("left", 1827, 496, 72, 524, 10) ; scroll to right side of map

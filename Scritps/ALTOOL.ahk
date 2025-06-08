@@ -1,6 +1,8 @@
 ; AutoHotkey v2 Map Selection Menu Template
 ; Press M to open menu, select map and difficulty, then press F1 to execute actions
 
+#Include Remapping.ahk
+#Include Utils.ahk
 ; Global variables
 selectedMap := ""
 selectedDifficulty := ""
@@ -215,30 +217,30 @@ ExecuteMapActions(mapName, difficulty) {
     switch mapName {
         case "Ash Forest":
             if (difficulty == "Normal") {
-                AshForest(false)
+                Remapping.AshForest(false)
             } else if (difficulty == "Elite") {
-                AshForest(true)
+                Remapping.AshForest(true)
             }
             
         case "Indigo":
             if (difficulty == "Normal") {
-                Indigo(false)
+                Remapping.AshForest(false)
             } else if (difficulty == "Elite") {
-                Indigo(true)
+                Remapping.AshForest(true)
             }
             
         case "Blue Abyss":
             if (difficulty == "Normal") {
-                BlueAbyss(false)
+                Remapping.BlueAbyss(false)
             } else if (difficulty == "Elite") {
-                BlueAbyss(true)
+                Remapping.BlueAbyss(true)
             }
             
         case "Hedo":
             if (difficulty == "Normal") {
-                Hedo(false)
+                Remapping.Hedo(false)
             } else if (difficulty == "Elite") {
-                Hedo(true)
+                Remapping.Hedo(true)
             }
             
         case "Map 5":
@@ -259,72 +261,6 @@ ExecuteMapActions(mapName, difficulty) {
 ; Hotkey: F2 - Exit the application
 F2::ExitApp
 
-AshForest(isElite){
-    ; Remaps to Map
-    MouseClick("left", 187, 67)  ; Clicks avatar for main menu
-    Sleep(200)
-    MouseClick("left", 561, 977)  ; opens map 
-    Sleep(200)
-    if (isElite){
-        MouseClick("left", 1768, 982) ; clicks elite
-        Sleep(200)
-    }
-    MouseClickDrag("left", 1827, 496, 72, 524, 10) ; scroll to right side of map
-    MouseClick("left", 1663, 202) ; clicks on elder woods
-    Sleep(200)
-    MouseClick("left", 599, 433) ; Clicks on ash forest
-    Sleep(200)
-    MouseClick("left", 1182, 902)
-   
-}
-
-BlueAbyss(isElite){
-    MouseClick("left", 187, 67)  ; Clicks avatar for main menu
-    Sleep(200)
-    MouseClick("left", 561, 977)  ; opens map 
-    Sleep(200)
-    if (isElite){
-    MouseClick("left", 1768, 982) ; clicks elite
-    Sleep(200)
-    }
-    MouseClickDrag("left", 1827, 496, 72, 524, 10) ; scroll to right side of map
-    MouseClick("left", 1663, 202) ; clicks on elder woods
-    Sleep(200)
-    MouseClick("left", 614, 655) ;
-    Sleep(200)
-    MouseClick("left", 1182, 902)
-}
-
-Hedo(isElite){
-    ; Remaps to Map
-    MouseClick("left", 187, 67)  ; Clicks the avatar
-    Sleep(200)
-    MouseClick("left", 561, 977)  ; Opens the map
-    Sleep(200)
-    if (isElite){
-    MouseClick("left", 1768, 982) ; turns game to elite
-    Sleep(200)
-    }
-    MouseClickDrag("left", 1827, 496, 72, 524, 10) ; scroll to right side of map
-    MouseClick("left", 1500, 327)
-    Sleep(200)
-    MouseClick("left", 965, 814)
-}
-
-Indigo(isElite){
-    ; Remaps to Map
-    GoToMap("right")
-    if (isElite){
-    MouseClick("left", 1768, 982) ; clicks elite
-    Sleep(200)
-    }
-    MouseClickDrag("left", 1827, 496, 72, 524, 10) ; scroll to right side of map
-    MouseClick("left", 1663, 202) ; clicks on elder woods
-    Sleep(200)
-    MouseClick("left", 586, 551) ;
-    Sleep(200)
-    MouseClick("left", 1182, 902)
-}
 
 RandomSleep(min, max){
     Sleep(Random(min, max))
