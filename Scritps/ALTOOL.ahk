@@ -66,7 +66,7 @@ CreateMenu() {
     resetBtn.OnEvent("Click", (*) => ResetSelections())
     
     ; Instructions
-    menuGui.Add("Text", "x10 y250 w270 h40 Center", "Press M to toggle menu | Press F1 to execute`nPress F2 to exit app")
+    menuGui.Add("Text", "x10 y250 w270 h40 Center", "Press ctrl + F1 to toggle menu | Press F1 to execute`nPress ctrl + F2 to exit app")
     
     ; Store references for later use
     menuGui.mapButtons := mapButtons
@@ -164,7 +164,7 @@ UpdateStatus() {
 }
 
 ; Hotkey: M - Toggle menu visibility
-m::
+^F1::
 {
     global menuGui
     
@@ -208,11 +208,6 @@ F1::
 
 ; Main execution function - customize this with your specific actions
 ExecuteMapActions(mapName, difficulty) {
-    ; Display current selection (remove this in your final version)
-    ; MsgBox("Executing actions for:`nMap: " . mapName . "`nDifficulty: " . difficulty, "Executing...", 64)
-    
-    ; Add your specific actions here based on map and difficulty
-    ; Example structure:
     
     switch mapName {
         case "Ash Forest":
@@ -254,12 +249,10 @@ ExecuteMapActions(mapName, difficulty) {
             MsgBox("Unknown map: " . mapName, "Error", 16)
     }
     
-    ; Show completion message (remove this in your final version)
-    ; MsgBox("Actions completed for " . mapName . " (" . difficulty . ")", "Complete", 64)
 }
 
 ; Hotkey: F2 - Exit the application
-F2::ExitApp
+^F2::ExitApp
 
 
 RandomSleep(min, max){
