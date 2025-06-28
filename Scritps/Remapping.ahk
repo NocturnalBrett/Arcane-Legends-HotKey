@@ -3,7 +3,6 @@
 
 
 Class Remapping {
-
     
     Static AshForest(isElite){
     ; Remaps to Map
@@ -69,7 +68,6 @@ Class Remapping {
     Static GoToMap(direction){
         left := "left"
         right := "right"
-        ToolTip("Use " . left . "or " . right)
         MouseClick("left", 187, 67)  ; Clicks avatar for main menu
         Utils.RandomSleep(250, 300)
         MouseClick("left", 561, 977)  ; opens map 
