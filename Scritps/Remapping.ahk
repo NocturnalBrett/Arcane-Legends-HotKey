@@ -65,6 +65,23 @@ Class Remapping {
         MouseClick("left", 1182, 902)
     }
 
+    Static SanctuaryOfSecrets(isElite){
+        ; Remaps to Map
+        this.GoToMap("right")
+        Utils.RandomSleep(250, 300)
+        if (isElite){
+        MouseClick("left", 1768, 982) ; clicks elite
+            Utils.RandomSleep(250, 300)
+        }
+        MouseClickDrag("left", 1827, 496, 72, 524, 10) ; scroll to right side of map
+        MouseClick("left", 791, 740) ; clicks on elder woods
+        Utils.RandomSleep(250, 300)
+        ; CLick sanctuary of sectrest
+        MouseClick("left", 600, 650) ;
+        Utils.RandomSleep(250, 300)
+        MouseClick("left", 1182, 902)
+    }
+
     Static GoToMap(direction){
         left := "left"
         right := "right"
