@@ -82,6 +82,34 @@ Class Remapping {
         MouseClick("left", 1182, 902)
     }
 
+    Static Relog(){
+        playColor := 0xFDF9DB
+        maxWaitTime := 3000
+
+        ; Exits to lobby
+        Send("{Escape}")
+        Utils.RandomSleep(350, 500)
+
+        ; Quit to menu
+        MouseClick("left", 194, 1024)
+        Utils.RandomSleep(200, 500)
+
+        startTime := A_TickCount
+        Loop{
+            ; Breaks if wait time is exceeded
+            if (startTime - A_TickCount >= maxWaitTime) {
+            break
+            }
+
+            if (playColor = PixelGetColor(1734, 556)){
+                ; Clicks play
+                MouseClick("left", 1734, 556)
+                break
+            }
+        }
+        
+    }
+
     Static GoToMap(direction){
         left := "left"
         right := "right"

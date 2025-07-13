@@ -9,7 +9,7 @@ selectedDifficulty := ""
 menuGui := ""
 
 ; Available maps - add your maps here
-mapList := ["Ash Forest", "Indigo", "Blue Abyss", "Hedo"]
+mapList := ["Ash Forest", "Indigo", "Blue Abyss", "Hedo", "Sanctuary of Secrets", "Relog"]
 
 ; Difficulty options
 difficultyList := ["Normal", "Elite"]
@@ -58,23 +58,23 @@ CreateMenu() {
     }
     
     ; Status display
-    statusText := menuGui.Add("Text", "x10 y200 w270 h40 Center", "Select a map and difficulty, then press F1")
+    statusText := menuGui.Add("Text", "x10 y220 w270 h40 Center", "Select a map and difficulty, then press F1")
     statusText.SetFont("s10")
     
     ; Reset button
-    resetBtn := menuGui.Add("Button", "x10 y220 w100 h25", "Reset Selection")
+    resetBtn := menuGui.Add("Button", "x10 y240 w100 h25", "Reset Selection")
     resetBtn.OnEvent("Click", (*) => ResetSelections())
     
     ; Instructions
-    menuGui.Add("Text", "x10 y250 w270 h40 Center", "Press ctrl + F1 to toggle menu | Press F1 to execute`nPress ctrl + F2 to exit app")
+    menuGui.Add("Text", "x10 y270 w270 h40 Center", "Press ctrl + F1 to toggle menu | Press F1 to execute`nPress ctrl + F2 to exit app")
     
     ; Store references for later use
     menuGui.mapButtons := mapButtons
     menuGui.difficultyButtons := difficultyButtons
     menuGui.statusText := statusText
     
-    ; Show the GUI
-    menuGui.Show("w300 h290")
+    ; Show the GUI (increased height to accommodate 5 maps)
+    menuGui.Show("w300 h320")
     
     ; Update status display
     UpdateStatus()
@@ -191,6 +191,11 @@ F1::
 {
     global selectedMap, selectedDifficulty
     
+    if (selectedMap = "Relog"){
+        ExecuteMapActions(selectedMap, selectedDifficulty)
+        return
+    }
+
     ; Check if both map and difficulty are selected
     if (selectedMap == "" || selectedDifficulty == "") {
         MsgBox("Please select both a map and difficulty before pressing F1!", "Selection Required", 48)
@@ -207,7 +212,7 @@ F1::
 }
 
 ; Main execution function - customize this with your specific actions
-ExecuteMapActions(mapName, difficulty) {
+ExecuteMapActions(mapName, difficulty := false) {
     
     switch mapName {
         case "Ash Forest":
@@ -219,9 +224,9 @@ ExecuteMapActions(mapName, difficulty) {
             
         case "Indigo":
             if (difficulty == "Normal") {
-                Remapping.AshForest(false)
+                Remapping.Indigo(false)
             } else if (difficulty == "Elite") {
-                Remapping.AshForest(true)
+                Remapping.Indigo(true)
             }
             
         case "Blue Abyss":
@@ -238,12 +243,14 @@ ExecuteMapActions(mapName, difficulty) {
                 Remapping.Hedo(true)
             }
             
-        case "Map 5":
+        case "Sanctuary of Secrets":
             if (difficulty == "Normal") {
-                ; Add your Map 5 Normal actions here
+                Remapping.SanctuaryOfSecrets(false)
             } else if (difficulty == "Elite") {
-                ; Add your Map 5 Elite actions here
+                Remapping.SanctuaryOfSecrets(true)
             }
+        case "Relog":
+            Remapping.Relog()
             
         default:
             MsgBox("Unknown map: " . mapName, "Error", 16)
@@ -262,4 +269,3 @@ RandomSleep(min, max){
 
 ; Initialize the script
 CreateMenu()
-
